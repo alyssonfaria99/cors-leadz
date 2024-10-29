@@ -35,7 +35,7 @@ app.post('/proxy', async (req, res) => {
         res.status(response.status).json(response.data);
     } catch (error) {
         console.error('Erro ao encaminhar a requisição:', error.message);
-        res.status(500).json({ status: 'error', message: 'Erro ao processar a requisição' });
+        res.status(500).json({ status: 'error', message: error.message });
     }
 });
 
