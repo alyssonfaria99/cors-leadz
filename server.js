@@ -1,26 +1,28 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');  // Importa o middleware CORS
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+// Ativa o CORS para todas as rotas
+app.use(cors());
 
 // Middleware para permitir JSON no corpo das requisições
 app.use(express.json());
+
+// Rota para evitar erro 503 no favicon
+app.get('/favicon.ico', (req, res) => res.status(204));
 
 // Rota para o proxy
 app.post('/proxy', async (req, res) => {
     try {
         // Substitua 'YOUR_SCRIPT_URL' pela URL do Google Apps Script copiada anteriormente
-        const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbxaxcz6uaZGue8kWm-mb4ruND02Fk6xGvvqCYeEqfAxYJA5YOOLjGMBPMB9v1BCyP03/exec';
+        const googleAppsScriptUrl = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
 
         // Encaminha a requisição para o Google Apps Script com os dados recebidos
         const response = await axios.post(googleAppsScriptUrl, req.body, {
             headers: { 'Content-Type': 'application/json' }
         });
-
-        // Adiciona os cabeçalhos CORS
-        res.set('Access-Control-Allow-Origin', '*');
-        res.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
-        res.set('Access-Control-Allow-Headers', 'Content-Type');
 
         // Envia a resposta de volta para o cliente (WaSpeed)
         res.status(response.status).json(response.data);
