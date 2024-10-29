@@ -33,4 +33,4 @@ app.post('/proxy', async (req, res) => {
 });
 
 // Inicia o servidor na porta definida
-app.listen(3000, () => console.log(`Proxy ativo na porta 3000`));
+app.listen(PORT, () => console.log(`Proxy ativo na porta ${PORT}`));
