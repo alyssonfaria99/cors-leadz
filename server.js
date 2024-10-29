@@ -1,11 +1,18 @@
 const express = require('express');
 const axios = require('axios');
-const cors = require('cors');  // Importa o middleware CORS
+const cors = require('cors'); // Importa o middleware CORS
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Ativa o CORS para todas as rotas
+// Middleware para ativar CORS para todas as rotas
 app.use(cors());
+
+// Middleware para definir o cabeçalho Content-Security-Policy
+app.use((req, res, next) => {
+    // Permite scripts apenas da própria origem do servidor (bloqueia 'eval' e 'new Function')
+    res.setHeader("Content-Security-Policy", "script-src 'self'");
+    next();
+});
 
 // Middleware para permitir JSON no corpo das requisições
 app.use(express.json());
@@ -32,5 +39,5 @@ app.post('/proxy', async (req, res) => {
     }
 });
 
-// Inicia o servidor na porta definida
+// Inicia o servidor na porta correta
 app.listen(PORT, () => console.log(`Proxy ativo na porta ${PORT}`));
