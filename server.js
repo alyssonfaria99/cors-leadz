@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 app.get('/proxy', async (req, res) => {
     try {
         // Substitua 'YOUR_SCRIPT_URL' pela URL do Google Apps Script copiada anteriormente
-        const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbxaxcz6uaZGue8kWm-mb4ruND02Fk6xGvvqCYeEqfAxYJA5YOOLjGMBPMB9v1BCyP03/exec';
+        const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbwsr9MqX4cIgo1vNS6idSeHSc0NNPLwJrT07CmXeTXJeQcZBQtYU_LS_C-bFsqZSVXQ/exec';
 
         // Encaminha a requisição para o Google Apps Script com os dados recebidos
         const response = await axios.post(googleAppsScriptUrl, req.body, {
