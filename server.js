@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 })
 
 // Rota para o proxy
-app.post('/proxy', async (req, res) => {
+app.get('/proxy', async (req, res) => {
     try {
         // Substitua 'YOUR_SCRIPT_URL' pela URL do Google Apps Script copiada anteriormente
         const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbxaxcz6uaZGue8kWm-mb4ruND02Fk6xGvvqCYeEqfAxYJA5YOOLjGMBPMB9v1BCyP03/exec';
