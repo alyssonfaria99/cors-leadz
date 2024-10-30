@@ -43,5 +43,22 @@ app.get('/proxy', async (req, res) => {
     }
 });
 
+app.post('/proxy', async (req, res) => {
+    try {
+        // Substitua 'YOUR_SCRIPT_URL' pela URL do Google Apps Script copiada anteriormente
+        const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbwsr9MqX4cIgo1vNS6idSeHSc0NNPLwJrT07CmXeTXJeQcZBQtYU_LS_C-bFsqZSVXQ/exec';
+
+        // Encaminha a requisição para o Google Apps Script com os dados recebidos
+        const response = await axios.post(googleAppsScriptUrl, req.body, {
+            headers: { 'Content-Type': 'application/json' }
+        });
+        // Envia a resposta de volta para o cliente (WaSpeed)
+        res.status(response.status).json(response.data);
+    } catch (error) {
+        console.error('Erro ao encaminhar a requisição:', error.message);
+        res.status(500).json({ status: 'error', message: error.message });
+    }
+});
+
 // Inicia o servidor na porta correta
 app.listen(PORT, () => console.log(`Proxy ativo na porta ${PORT}`));
