@@ -7,12 +7,12 @@ const PORT = process.env.PORT || 3000;
 // Middleware para ativar CORS para todas as rotas
 app.use(cors());
 
-// Middleware para definir o cabeçalho Content-Security-Policy
-// app.use((req, res, next) => {
-//     // Permite scripts apenas do próprio servidor
-//     res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self'");
-//     next();
-// });
+//Middleware para definir o cabeçalho Content-Security-Policy
+app.use((req, res, next) => {
+    // Permite scripts apenas do próprio servidor
+    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self'");
+    next();
+});
 
 // Middleware para permitir JSON no corpo das requisições
 app.use(express.json());
