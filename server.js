@@ -10,7 +10,7 @@ app.use(cors());
 //Middleware para definir o cabeçalho Content-Security-Policy
 app.use((req, res, next) => {
     // Permite scripts apenas do próprio servidor
-    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self'");
+    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'");
     next();
 });
 
